@@ -1,0 +1,74 @@
+<!-- 2.16 A local university has asked you to create an HTML5 document that allows prospective col-
+lege students to provide feedback about their campus visit. 
+
+Your HTML5 document should contain a form with text fields for a name and e-mail. 
+
+Provide checkboxes that allow prospective students to
+indicate what they liked most about the campus. The checkboxes should include: campus, students,
+location, atmosphere, dorm rooms and sports. 
+
+Also, provide radio buttons that ask the prospective students how they became interested in the college. Options should include: friends, television, In-
+ternet and other. 
+
+In addition, provide a text area for additional comments, a submit button and a
+reset button. Use post to sent the information in the form to http://www.deitel.com.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW1_Q7</title>
+</head>
+<body>
+    <form action="http://www.deitel.com" method="post">
+        <label for="name">Enter name:</label>
+        <input type="text" name="name" required>
+        <br><br>
+        <label for="email">Enter email:</label>
+        <input type="email" name="email" required>
+        <br><br>
+
+        <p>What did you like most about our campus?</p>
+        <label for="campusCheck">Campus?</label>
+        <input type="checkbox" name="campusCheck" id="campusCheck">
+        <br>
+        <label for="studentsCheck">Students?</label>
+        <input type="checkbox" name="studentsCheck" id="studentsCheck">
+        <br>
+        <label for="locationCheck">Location?</label>
+        <input type="checkbox" name="locationCheck" id="locationCheck">
+        <br>
+        <label for="atmoCheck">Atmosphere?</label>
+        <input type="checkbox" name="atmoCheck" id="atmoCheck">
+        <br>
+        <label for="dormCheck">Dorms?</label>
+        <input type="checkbox" name="dormCheck" id="dormCheck">
+        <br>
+        <label for="sportCheck">Sports?</label>
+        <input type="checkbox" name="sportCheck" id="sportCheck">
+        <br><br>
+
+        <p>How did you become interested in our college?</p>
+        <label for="friendsRadio">Friends?</label>
+        <input type="radio" name="howInterested" id="friendsRadio">
+        <br>
+        <label for="tvRadio">Television?</label>
+        <input type="radio" name="howInterested" id="tvRadio">
+        <br>
+        <label for="internetRadio">Internet?</label>
+        <input type="radio" name="howInterested" id="internetRadio">
+        <br>
+        <label for="otherRadio">Other?</label>
+        <input type="radio" name="howInterested" id="otherRadio">
+        <br><br>
+
+        <p>Add any other additional comments:</p>
+        <textarea name="comments" id="comments"></textarea>
+        <br><br>
+        <input type="reset" value="Reset">
+        <input type="submit" value="Submit">
+
+    </form>
+</body>
+</html>

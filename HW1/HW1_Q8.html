@@ -1,0 +1,46 @@
+<!-- 3.6 (Website Registration Form with Optional Survey) 
+Create a website registration form to obtain a user’s first name, last name and e-mail address. 
+
+In addition, include an optional survey question that asks the user’s year in college (e.g., Freshman). 
+
+Place the optional survey question in a details element that the user can expand to see the question.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW1_Q8</title>
+</head>
+<body>
+    <h1>Registration</h1>
+    <form action="">
+        <label for="fName">Input first name:</label>
+        <input type="text" name="firstName" id="fName" required>
+        <label for="lName">Input last name:</label>
+        <input type="text" name="lastName" id="lName" required>
+        <br><br>
+        <label for="email">Input email:</label>
+        <input type="email" name="email" id="email" required>
+
+        <br><br>
+        <details>
+            <summary>Optional Survey: Your College Year</summary>
+            <p>Please select your current year in college:</p>
+            <select name="cYear" id="cYear">
+                <option value="">Please choose an option</option>
+                <option value="freshman">Freshman</option>
+                <option value="sophomore">Sophomore</option>
+                <option value="junior">Junior</option>
+                <option value="senior">Senior</option>
+                <option value="graduate">Graduate Student</option>
+                <option value="alumni">Alumni</option>
+            </select>
+        </details>
+
+        <br><br>
+        <input type="reset" value="Reset">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
