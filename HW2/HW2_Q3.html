@@ -1,0 +1,34 @@
+<!-- 4.7 Make a layout template that contains a header and two paragraphs. Use float to line up
+the two paragraphs as columns side by side. Give the header and two paragraphs a border and/or a
+background color so you can see where they are. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1, p {
+            padding: 20px;
+            border: solid;
+            background-color: rgb(223, 255, 244);
+            border-color: aquamarine;
+            border-radius: 5px;
+            max-width: fit-content;
+        }
+        .col-left {
+            float: left;
+            margin-right: 3%;
+        }
+        .col-right {
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="header">HW2_Q3</h1>
+    <p class="col-left">One paragraph</p>
+    <p class="col-right">Two paragraph</p>
+</body>
+</html>
