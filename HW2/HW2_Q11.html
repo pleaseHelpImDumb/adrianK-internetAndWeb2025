@@ -1,1 +1,52 @@
+<!-- 6.19 Write a script that gets from the user the radius of a circle and outputs HTML5 text that
+displays the circle’s diameter, circumference and area. Use the constant value 3.14159 for π. Use the
+GUI techniques shown in Fig. 6.7. [Note: You may also use the predefined constant Math.PI for the
+value of π. This constant is more precise than the value 3.14159. The Math object is defined by Java-
+Script and provides many common mathematical capabilities.] Use the following formulas (r is the
+radius): diameter = 2r, circumference = 2
+πr, area =
+πr 2-->
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW2 Q11</title>
+</head>
+<body>
+    <h1>Circle Calculator:</h1>
+    <button id="radius">Enter Radius</button>
+    <script>
+        const radButton = document.querySelector("button");
+        const docBody = document.querySelector("body");
+
+        radButton.addEventListener("click", enterRadFunc);
+    
+        let radius;
+        
+        const pDia = document.createElement("p");
+        const pCir = document.createElement("p");
+        const pArea = document.createElement("p");
+        docBody.appendChild(pDia);
+        docBody.appendChild(pCir);
+        docBody.appendChild(pArea);
+
+        function enterRadFunc(){
+            radius = window.prompt("Enter Radius: ");
+            
+
+
+            pDia.innerHTML = `Diameter:<br>D = 2*R<br>D = 2*${radius}<br>D = ${radius*2}`;
+
+            pCir.innerHTML = `Circumference:<br>C = 2πR<br>C = 2π*${radius}<br>C = ${(radius*Math.PI*2).toFixed(4)}`;
+
+            pArea.innerHTML = `Area:<br>A = π(R^2)<br>A = π(${radius}^2)<br>A = ${(Math.PI*(radius*radius)).toFixed(4)}`;
+        }
+
+        
+
+    </script>
+</body>
+</html>

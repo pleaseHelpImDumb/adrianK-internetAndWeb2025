@@ -1,1 +1,32 @@
+<!-- 5.14 (Transformation with :hover) Create a transformation program that includes four images.
+When the user hovers over an image, the size of the image should increase by 20%.-->
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW2 Q10</title>
+    <style>
+        .flex {
+            width: 150px;
+            display: flexbox;
+            flex-direction: column;
+        }
+        img {
+            padding: 20px;
+        }
+        img:hover{
+            transform:scale(1.20);
+        }
+    </style>
+</head>
+<body>
+    <div class="flex">
+        <img src="../ch05/fig05_16/EPT.png" width="100px" alt="Bug">
+        <img src="../ch05/fig05_16/EPT.png" width="100px" alt="Bug">
+        <img src="../ch05/fig05_16/EPT.png" width="100px" alt="Bug">
+        <img src="../ch05/fig05_16/EPT.png" width="100px" alt="Bug">
+    </div>
+</body>
+</html>
