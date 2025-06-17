@@ -1,0 +1,46 @@
+<!-- 5.5 (Rounded Corners) Create three div elements, each with a width and height of 100px. On
+the first element, create slightly rounded corners using a border of 3px black and border-radius of
+10px. On the second element, use a border of 3px black and increase the border-radius to 50px.
+On the third, use a border of 3px black and increase the border-radius to 100px. Make the back-
+ground-color of each element a different color of your choosing. Inside each element, display the
+value of the border-radius in bold text-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW2 Q6</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            border: solid;
+            border-width: 3px;
+            border-radius: 10px;
+        }
+        #div1 {
+            background-color: antiquewhite;
+        }
+        #div2 {
+            border-radius: 50px;
+            background-color: beige;
+        }
+        #div3 {
+            border-radius: 100px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <p><strong>Border radius: 10px</strong></p>
+    </div>
+    <div id="div2">
+        <p><strong>Border radius: 50px</strong></p>
+    </div>
+    <div id="div3">
+        <p><strong>Border radius: 100px</strong></p>
+    </div>
+</body>
+</html>

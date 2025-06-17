@@ -1,0 +1,64 @@
+<!-- 7.16 Write a script that uses looping to print the following table of values. Output the results in
+an HTML5 table. Use CSS to center the data in each column.
+
+N | 10*N | 100*N | 1000*N
+1
+2
+3
+4
+5
+6
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW3_Q1</title>
+    <style>
+        td {
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="table">
+    </div>
+    <script>
+        const nTable = document.querySelector("#table");
+        const nArray = [1,2,3,4,5,6];
+        let tableHTML = `
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>N</th>
+                        <th>N*10</th>
+                        <th>N*100</th>
+                        <th>N*1000</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+        nArray.forEach(num => {
+            const n10 = num * 10;
+            const n100 = num * 100;
+            const n1000 = num * 1000;
+            tableHTML += `
+                <tr>
+                    <td>${num}</td>
+                    <td>${n10}</td>
+                    <td>${n100}</td>
+                    <td>${n1000}</td>
+                </tr>
+            `;
+        });
+        tableHTML += `
+                </tbody>
+            </table>
+        `;
+        nTable.innerHTML = tableHTML;
+    </script>
+</body>
+</html>

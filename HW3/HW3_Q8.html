@@ -1,0 +1,35 @@
+<!-- 5.9 (Animation) Create an infinite animation of an element moving in a square pattern.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW Q8</title>
+    <style>
+        p {
+            background-color: blueviolet;
+            width: fit-content;
+            padding: 20px;
+            color: white;
+            border-radius: 20px;
+
+            position: relative;
+            animation-name: movingImage;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        @keyframes movingImage {
+            0% {left: 0px;top: 0px;}
+            25% {left: 100px; top: 0px;}
+            50% {left: 100px; top: 100px;}
+            75% {left: 0px; top: 100px;}
+            100% {left: 0px; top: 0px;}
+        }
+    </style>
+</head>
+<body>
+    <p>Square movement!</p>
+</body>
+</html>

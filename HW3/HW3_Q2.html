@@ -1,0 +1,36 @@
+<!-- 7.20 A palindrome is a number or a text phrase that reads the same backward and forward. For
+example, each of the following five-digit integers is a palindrome: 12321, 55555, 45554 and 11611.
+Write a script that reads in a five-digit integer and determines whether it’s a palindrome. If the num-
+ber is not five digits long, display an alert dialog indicating the problem to the user. Allow the user
+to enter a new value after dismissing the alert dialog. [Hint: It’s possible to do this exercise with the 
+techniques learned in this chapter. You’ll need to use both division and remainder operations to
+“pick off” each digit.] -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW3_Q2</title>
+</head>
+<body>
+    <script>
+        window.alert("Is {" + input + "} a palindrome?" +"\n" + isPalindrome(input));
+
+        function isPalindrome(num){
+            let reversedNum = 0;
+            let temp = num;
+
+            while (num > 0) {
+                reversedNum = (reversedNum*10) + (num%10); //Moves over digit to right, and sets it to the last digit in the number
+                num = Math.floor(num/10); //Sets the original number to the number without the last digit
+            }
+            console.log(reversedNum);
+            console.log(temp);
+            if(reversedNum == temp) {return "Yes!";}
+            else {return "No...";}   
+        }
+
+    </script>
+</body>
+</html>

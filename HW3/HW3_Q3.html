@@ -1,0 +1,59 @@
+<!-- 7.22 A company wants to transmit data over the telephone, but it’s concerned that its phones
+may be tapped. All of its data is transmitted as four-digit integers. It has asked you to write a script
+that will encrypt its data so that the data may be transmitted more securely. Your script should read
+a four-digit integer entered by the user in a prompt dialog and encrypt it as follows: Replace each
+digit by (the sum of that digit plus 7) modulus 10. Then swap the first digit with the third, and swap
+the second digit with the fourth. Then output HTML5 text that displays the encrypted integer. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW3_Q3</title>
+    <style>
+        p {
+            color: greenyellow; 
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body style="background-color: rgb(56, 56, 56);">
+    <p>Entered integer:</p>
+    <p id="entered"></p>
+    <p>Encrypted integer:</p>
+    <p id="encrypted"></p>
+    <script>
+        let input = window.prompt("Enter a four-digit integer:")
+        let entered = document.querySelector("#entered");
+        let encrypted = document.querySelector("#encrypted");
+        while(input.length != 4){
+            window.alert("You entered: " + input + "\nThis is not a four-digit integer");
+            input = window.prompt("Please enter a four-digit integer:")
+        }
+        entered.innerHTML = input;
+
+        encrypted.innerHTML = encrypt(input);
+
+        function encrypt(input){
+            let encryptedNum = "";
+
+            //Math
+            for(let i = 0; i < 4; i++){
+                let temp = parseInt(input.at(i));
+                temp = (temp+7)%10;
+                encryptedNum = encryptedNum + "" + temp;
+            }
+
+            //Swap
+            const d1 = encryptedNum.at(2);
+            const d2 = encryptedNum.at(3);
+            const d3 = encryptedNum.at(0);
+            const d4 = encryptedNum.at(1);
+
+            return ""+d1+d2+d3+d4;
+        }
+
+    </script>
+</body>
+</html>
