@@ -6,6 +6,7 @@ const hw3 = document.querySelector("#hw3-section");
 function hideAll(){
     hw1.style.display = "none";
     hw2.style.display = "none";
+    hw3.style.display = "none";
 }
 
 hideAll();
