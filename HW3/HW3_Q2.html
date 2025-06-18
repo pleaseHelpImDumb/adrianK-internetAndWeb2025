@@ -15,6 +15,10 @@ techniques learned in this chapter. You’ll need to use both division and remai
 </head>
 <body>
     <script>
+        let input = window.prompt("Enter a 5 digit number:");
+        while(input.length != 5){
+            input = window.prompt("Not 5 digits. Input a 5 digit number:");
+        }
         window.alert("Is {" + input + "} a palindrome?" +"\n" + isPalindrome(input));
 
         function isPalindrome(num){
