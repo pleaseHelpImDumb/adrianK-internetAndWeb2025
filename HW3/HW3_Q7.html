@@ -1,32 +1,73 @@
-<!-- 5.7 (Linear Gradient) Create a div element with a width and height of 500px. Create a diag-
-onal linear gradient using the colors of the rainbow—Red, Orange, Yellow, Green, Blue, Indigo,
-Violet.-->
+<!-- 9.19 An integer is said to be prime if it’s greater than 1 and divisible only by 1 and itself. For
+example, 2, 3, 5 and 7 are prime, but 4, 6, 8 and 9 are not.
+a) Write a function that determines whether a number is prime.
+b) Use this function in a script that determines and prints all the prime numbers between
+1 and 10,000. How many of these 10,000 numbers do you really have to test before
+being sure that you have found all the primes? Display the results in a <textarea>.
+c) Initially, you might think that n/2 is the upper limit for which you must test to see
+whether a number is prime, but you need go only as high as the square root of n. Why?
+Rewrite the program using the Math.sqrt method to calculate the square root, and run
+it both ways. Estimate the performance improvement. -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HW2 Q7</title>
-    <style>
-        div {
-            width: 500px;
-            height: 500px;
-            background: linear-gradient(
-                to right,
-                red,
-                orange,
-                yellow,
-                green,
-                blue,
-                indigo,
-                violet
-            )
-        }
-    </style>
+    <title>HW3_Q7</title>
 </head>
 <body>
-    <div>
-    </div>
+    <h1>Prime numbers from 1 - 10,000:</h1>
+    <textarea name="primes" id="">1</textarea>
+    <script>
+        const text = document.querySelector("textarea");
+        
+        function isPrime(num){
+            if(num <= 1) return false;
+            if(num <= 3) return true;
+
+            for(let i = 2; i < num; i++){
+                if(num%i == 0) return false;
+            }
+            return true;
+        }
+        
+        function isPrimeSQRT(num){
+            if (num <= 1) return false;
+            if (num <= 3) return true;
+            if (num % 2 === 0) return false;
+
+            const limit = Math.floor(Math.sqrt(num));
+
+            for(let i = 3; i <= limit; i+=2){
+                if(num%i == 0) return false;
+            }
+            return true;
+        }
+        
+        /*
+        let s1 = performance.now();
+        for(let i = 2; i <= 10000; i++){
+            let t = text.innerHTML;
+            if(isPrime(i)){
+                t = t + `, ${i}`;
+                text.innerHTML = t;
+            }
+        }
+        let s2 = performance.now();
+        console.log("Normal performance: " + (s2-s1).toFixed(3));
+        */
+
+        let t1 = performance.now();
+        for(let i = 2; i <= 10000; i++){
+            let t = text.innerHTML;
+            if(isPrimeSQRT(i)){
+                t = t + `, ${i}`;
+                text.innerHTML = t;
+            }
+        }
+        let t2 = performance.now();
+        console.log("Sqrt performance: " + ((t2-t1).toFixed(3)));
+    </script>
 </body>
 </html>

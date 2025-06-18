@@ -1,22 +1,89 @@
-<!-- 5.4 (Text Stroke) Create a text stroke on the phrase "New WebKit features". Make the color of
-the text LightBlue. Use a 3px Navy text-stroke and set the font-size to 700%-->
+<!-- 8.9 One interesting application of computers is drawing graphs and bar charts (sometimes
+called histograms). Write a script that reads five numbers between 1 and 30. For each number read,
+output HTML5 text that displays a line containing the same number of adjacent asterisks. For ex-
+ample, if your program reads the number 7, it should output HTML5 text that displays ******* -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HW2 Q5</title>
-    <style>
-        p {
-            font-size: 700%;
-            color: rgb(198, 198, 255);
-            -webkit-text-stroke: 3px;
-            -webkit-text-stroke-color: navy;
-        }
-    </style>
+    <title>HW3_Q5</title>
 </head>
 <body>
-    <p>New WebKit Features</p>
+    <label for="barOne">Input number:</label>
+    <input id="barOne" type="number" min="1" max="30" placeholder="1-30"><br><br>
+
+    <label for="barTwo">Input number:</label>
+    <input id="barTwo" type="number" min="1" max="30" placeholder="1-30"><br><br>
+
+    <label for="barThree">Input number:</label>
+    <input id="barThree" type="number" min="1" max="30" placeholder="1-30"><br><br>
+
+    <label for="barFour">Input number:</label>
+    <input id="barFour" type="number" min="1" max="30" placeholder="1-30"><br><br>
+
+    <label for="barFive">Input number:</label>
+    <input id="barFive" type="number" min="1" max="30" placeholder="1-30"><br><br>
+
+    <button>Generate Histogram</button>
+
+    <h1>Histogram:</h1>
+    <p id="one"></p>
+    <p id="two"></p>
+    <p id="three"></p>
+    <p id="four"></p>
+    <p id="five"></p>
+
+    <script>
+        const pOne = document.querySelector("#one");
+        const pTwo = document.querySelector("#two");
+        const pThree = document.querySelector("#three");
+        const pFour = document.querySelector("#four");
+        const pFive = document.querySelector("#five");
+
+        const iOne = document.querySelector("#barOne");
+        const iTwo = document.querySelector("#barTwo");
+        const iThree = document.querySelector("#barThree");
+        const iFour = document.querySelector("#barFour");
+        const iFive = document.querySelector("#barFive");
+
+        const button = document.querySelector("button");
+        button.addEventListener("click", generateHist);
+
+        function generateHist(){
+            let temp = "";
+            for(let i = 0; i < iOne.value; i++){
+                temp = temp + "*";
+            }
+            pOne.innerHTML = temp;
+
+            temp = "";
+            for(let i = 0; i < iTwo.value; i++){
+                temp = temp + "*";
+            }
+            pTwo.innerHTML = temp;
+
+            temp = "";
+            for(let i = 0; i < iThree.value; i++){
+                temp = temp + "*";
+            }
+            pThree.innerHTML = temp;
+
+            temp = "";
+            for(let i = 0; i < iFour.value; i++){
+                temp = temp + "*";
+            }
+            pFour.innerHTML = temp;
+
+            temp = "";
+            for(let i = 0; i < iFive.value; i++){
+                temp = temp + "*";
+            }
+            pFive.innerHTML = temp;
+        }
+
+    </script>
 </body>
-</html>
+</html> 
+
