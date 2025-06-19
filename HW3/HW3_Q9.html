@@ -1,86 +1,80 @@
-<!-- 5.13 (FBLM) Modify the example in Fig. 5.16 to use a vertical flexbox.-->
+<!-- 9.23 The use of computers in education is referred to as computer-assisted instruction (CAI).
+One problem that develops in CAI environments is student fatigue. This problem can be eliminated
+by varying the computer's dialogue to hold the student's attention. Modify the program in
+Exercise 9.22 to print one of a variety of comments for each correct answer and each incorrect an-
+swer. The set of responses for correct answers is as follows:
+Very good!
+Excellent!
+Nice work!
+Keep up the good work!
+The set of responses for incorrect answers is as follows:
+No. Please try again.
+Wrong. Try once more.
+Don't give up!
+No. Keep trying.
+Use random number generation to choose a number from 1 to 4 that will be used to select an
+appropriate response to each answer. Use a switch statement to issue the responses.
+-->
 
 <!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>HW3_Q9</title>
+</head>
+<body>
+   <div>
+      <h1>Multiplication practice!</h1>
+      <span>Questions Correct:</span>
+      <span id="counter">0</span>
+      <p>Question:</p>
+      <p id="question">3 x 3</p>
+   </div>
+   <div>
+      <textarea id="answerInput"></textarea>
+      <br>
+      <button>Submit</button>
+      <br>
+      <p id="output"></p>
+   </div>
+   <script>
+      const incorrect = [
+      "No. Please try again.",
+      "Wrong. Try once more.",
+      "Don't give up!",
+      "No. Keep trying."
+      ]
+      const correct = [
+      "Very good!",
+      "Excellent!",
+      "Nice work!",
+      "Keep up the good work!"
+      ]
+      const question = document.querySelector("#question");
+      let num1 = 0;
+      let num2 = 0;
+      let counter = 0;
+      function generateQuestion(){
+         num1 = Math.floor(Math.random()*9)+1;
+         num2 = Math.floor(Math.random()*9)+1;
+         question.innerHTML = `${num1} x ${num2} = ?`;
+      }
+      generateQuestion();
 
-<!-- Fig. 5.16: fblm.html -->
-<!-- Flexible Box Layout Model. -->
-<html>
-   <head>
-      <meta charset = "utf-8">
-      <title>HW2 Q9</title>
-      <link href = 'http://fonts.googleapis.com/css?family=Rosario' 
-         rel = 'stylesheet' type = 'text/css'>
-      <style type = "text/css">
-         .flexbox 
-         {
-            width: 600px;
-            height: 420px;
-            display: flexbox;
-            flex-direction: column;
+      const count = document.querySelector("#counter");
+      const subButton = document.querySelector("button");
+      const output = document.querySelector("#output");
+      const input = document.querySelector("#answerInput");
+      subButton.addEventListener("click", function checkAnswer(){
+         if(num1 * num2 == input.value) {
+               output.innerHTML = correct[Math.floor(Math.random()*4)];
+               generateQuestion();
+               counter = counter+1;
+               count.innerHTML = counter;
          }
-         .flexbox > div 
-         {
-            -webkit-transition: 1s ease-out;
-            transition: 1s ease-out;
-            -webkit-border-radius: 10px;
-            border-radius: 10px;
-            border: 2px solid black;
-            width: 120px;
-            margin: 10px -10px 10px 0px;
-            padding: 20px 20px 20px 20px;
-            box-shadow: 10px 10px 10px dimgrey;
-         }
-         .flexbox > div:nth-child(1){ background-color: lightgrey; }
-         .flexbox > div:nth-child(2){ background-color: lightgrey; }
-         .flexbox > div:nth-child(3){ background-color: lightgrey; }
-         .flexbox > div:nth-child(4){ background-color: lightgrey; }
-
-         .flexbox > div:hover { 
-            width: 200px; color: white; font-weight: bold; }
-         .flexbox > div:nth-child(1):hover { background-color: royalblue; }
-         .flexbox > div:nth-child(2):hover { background-color: crimson; }
-         .flexbox > div:nth-child(3):hover { background-color: crimson; }
-         .flexbox > div:nth-child(4):hover { background-color: darkgreen; }
-         p { height: 250px; overflow: hidden; font-family: "Rosario" }
-      </style>
-   </head>
-   <body>
-      <div class = "flexbox">
-      <div><img src = "GPP.png" alt = "Good programming practice icon">
-         <p>Good Programming Practices call attention to techniques that 
-         will help you produce programs that are clearer, more 
-         understandable and more maintainable.</p></div>
-      <div><img src = "EPT.png" alt = "Error prevention tip icon">
-         <p>Error-Prevention Tips contain suggestions for exposing bugs 
-         and removing them from your programs; many describe aspects of 
-         programming that prevent bugs from getting into programs in 
-         the first place.</p></div>
-      <div><img src = "CPE.png" alt = "Common programming error icon">
-         <p>Common Programming Errors point out the errors that students 
-         tend to make frequently. These Common Programming Errors reduce 
-         the likelihood that you'll make the same mistakes.</p></div>
-      <div><img src = "SEO.png" 
-         alt = "Software engineering observation icon"><p>Software 
-         Engineering Observations highlight architectural and design 
-         issues that affect the construction of software systems, 
-         especially large-scale systems.</p></div>
-      </div>
-   </body>
+         else {output.innerHTML = incorrect[Math.floor(Math.random()*4)];}
+      });
+   </script>
+</body>
 </html>
-
-<!--
-**************************************************************************
-* (C) Copyright 1992-2012 by Deitel & Associates, Inc. and               *
-* Pearson Education, Inc. All Rights Reserved.                           *
-*                                                                        *
-* DISCLAIMER: The authors and publisher of this book have used their     *
-* best efforts in preparing the book. These efforts include the          *
-* development, research, and testing of the theories and programs        *
-* to determine their effectiveness. The authors and publisher make       *
-* no warranty of any kind, expressed or implied, with regard to these    *
-* programs or to the documentation contained in these books. The authors *
-* and publisher shall not be liable in any event for incidental or       *
-* consequential damages in connection with, or arising out of, the       *
-* furnishing, borderormance, or use of these programs.                     *
-**************************************************************************
--->

@@ -1,53 +1,191 @@
-<!-- 6.19 Write a script that gets from the user the radius of a circle and outputs HTML5 text that
-displays the circle’s diameter, circumference and area. Use the constant value 3.14159 for π. Use the
-GUI techniques shown in Fig. 6.7. [Note: You may also use the predefined constant Math.PI for the
-value of π. This constant is more precise than the value 3.14159. The Math object is defined by Java-
-Script and provides many common mathematical capabilities.] Use the following formulas (r is the
-radius): diameter = 2r, circumference = 2
-πr, area =
-πr 2-->
-
+<!-- 9.27 (Project) Exercises 9.22 through 9.24 developed a computer-assisted instruction program
+to teach an elementary-school student multiplication. This exercise suggests enhancements to that
+program.
+a) Modify the program to allow the user to enter a grade-level capability. A grade level of
+1 means to use only single-digit numbers in the problems, a grade level of 2 means to
+use numbers as large as two digits, and so on.
+b) Modify the program to allow the user to pick the type of arithmetic problems he or she
+wishes to study. An option of 1 means addition problems only, 2 means subtraction
+problems only, 3 means multiplication problems only, 4 means division problems only
+and 5 means to intermix randomly problems of all these types. -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HW2 Q11</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>HW3_Q8</title>
 </head>
 <body>
-    <h1>Circle Calculator:</h1>
-    <button id="radius">Enter Radius</button>
-    <script>
-        const radButton = document.querySelector("button");
-        const docBody = document.querySelector("body");
+   <div>
+      <h1>Math Practice!</h1>
+      <select name="gradeSelect" id="gradeSelect">
+        <option value="">Select Grade Level</option>
+        <option value="grade1">Grade 1</option>
+        <option value="grade2">Grade 2</option>
+      </select>
+      <select name="probSelect" id="probSelect">
+        <option value="">Select type of problems</option>
+        <option value="add">Addition</option>
+        <option value="sub">Subtraction</option>
+        <option value="mult">Multiplication</option>
+        <option value="divi">Division</option>
+        <option value="rand">Random</option>
+      </select>
+      <br><br>
+      <span>Questions Correct:</span>
+      <span id="counter">0</span><br>
+      <span>Incorrect Answers:</span>
+      <span id="inCoCounter">0</span>
+      <p>Question:</p>
+      <p id="question"></p>
+   </div>
+   <div>
+      <textarea id="answerInput"></textarea>
+      <br>
+      <button>Submit</button>
+      <br>
+      <p id="output"></p>
+   </div>
+   <script>
+        const incorrect = [
+        "No. Please try again.",
+        "Wrong. Try once more.",
+        "Don't give up!",
+        "No. Keep trying."
+        ]
+        const correct = [
+        "Very good!",
+        "Excellent!",
+        "Nice work!",
+        "Keep up the good work!"
+        ]
+        const question = document.querySelector("#question");
+        let num1 = 0;
+        let num2 = 0;
+        let counter = 0;
+        let incorrectCounter = 0;
+        let questionsComplete = 0;
 
-        radButton.addEventListener("click", enterRadFunc);
     
-        let radius;
-        
-        const pDia = document.createElement("p");
-        const pCir = document.createElement("p");
-        const pArea = document.createElement("p");
-        docBody.appendChild(pDia);
-        docBody.appendChild(pCir);
-        docBody.appendChild(pArea);
+        const selectGrade = document.querySelector("#gradeSelect");
+        const selectType = document.querySelector("#probSelect");
+        let probType = "";
+        function generateQuestion(){
 
-        function enterRadFunc(){
-            radius = window.prompt("Enter Radius: ");
-            if (radius == null) radius = 0;
+            switch(selectGrade.value){
+                case "grade1":
+                    num1 = Math.floor(Math.random()*9)+1;
+                    num2 = Math.floor(Math.random()*9)+1;
+                    break;
+                case "grade2":
+                    num1 = Math.floor(Math.random()*99)+1;
+                    num2 = Math.floor(Math.random()*99)+1;
+                    break;
+                default:
+                    num1 = Math.floor(Math.random()*9)+1;
+                    num2 = Math.floor(Math.random()*9)+1;
+                    break;
+            }
             
-
-
-            pDia.innerHTML = `Diameter:<br>D = 2*R<br>D = 2*${radius}<br>D = ${radius*2}`;
-
-            pCir.innerHTML = `Circumference:<br>C = 2πR<br>C = 2π*${radius}<br>C = ${(radius*Math.PI*2).toFixed(4)}`;
-
-            pArea.innerHTML = `Area:<br>A = π(R^2)<br>A = π(${radius}^2)<br>A = ${(Math.PI*(radius*radius)).toFixed(4)}`;
+            switch(selectType.value){
+                case "add":
+                    question.innerHTML = `${num1} + ${num2} = ?`;
+                    probType = "add";
+                    console.log(num1+num2);
+                    break;
+                case "sub":
+                    question.innerHTML = `${num1} - ${num2} = ?`;
+                    probType = "sub";
+                    console.log(num1-num2);
+                    break;
+                case "mult":
+                    question.innerHTML = `${num1} x ${num2} = ?`;
+                    probType = "mult";
+                    console.log(num1*num2);
+                    break;
+                case "divi":
+                    question.innerHTML = `${num1} / ${num2} = ?`;
+                    probType = "divi";
+                    console.log(num1/num2);
+                    break;
+                case "rand":
+                    let randOption = Math.floor(Math.random()*4) + 1;
+                    switch (randOption){
+                        case 1:
+                            question.innerHTML = `${num1} + ${num2} = ?`;
+                            probType = "add";
+                            console.log(num1+num2);
+                            break;
+                        case 2:
+                            question.innerHTML = `${num1} - ${num2} = ?`;
+                            probType = "sub";
+                            console.log(num1-num2);
+                            break;
+                        case 3:
+                            question.innerHTML = `${num1} x ${num2} = ?`;
+                            probType = "mult";
+                            console.log(num1*num2);
+                            break;
+                        case 4:
+                            question.innerHTML = `${num1} / ${num2} = ? (Rounded to 2 decimal points)`;
+                            probType = "divi";
+                            console.log(num1/num2);
+                            break;
+                    }
+                    break;    
+                default:
+                    question.innerHTML = `${num1} x ${num2} = ?`;
+                    break;
+            }
         }
+        generateQuestion();
 
-        
-
-    </script>
+        const count = document.querySelector("#counter");
+        const subButton = document.querySelector("button");
+        const output = document.querySelector("#output");
+        const input = document.querySelector("#answerInput");
+        const incorrectCount = document.querySelector("#inCoCounter");
+        subButton.addEventListener("click", function checkAnswer(){
+            let ansCorrect = false;
+            switch(probType){
+                case "add":
+                    if((num1 + num2) == input.value) {ansCorrect = true;}
+                    break;
+                case "sub":
+                    if((num1 - num2) == input.value) {ansCorrect = true;}
+                    break;
+                case "mult":
+                    if((num1 * num2) == input.value) {ansCorrect = true;}
+                    break;
+                case "divi":
+                    if((num1/num2) == input.value) {ansCorrect = true;}
+                    break;
+                default:
+                    ansCorrect = false;
+                    break;
+            }
+            if(ansCorrect) {
+                output.innerHTML = correct[Math.floor(Math.random()*4)];
+                generateQuestion();
+                counter = counter+1;
+                count.innerHTML = counter;
+                questionsComplete = questionsComplete + 1;
+                if(questionsComplete == 10){
+                    questionsComplete = 0;
+                    let percent = (counter/(counter+incorrectCounter)).toFixed(2);
+                    if(percent < 0.75){
+                        window.alert("Percentage: " + percent + "\nPlease ask your instructor for extra help.");
+                    }
+                    else{window.alert("Percentage so far: " + (percent*100) + "%\nWell done.");}
+                }
+            }
+            else {
+                incorrectCounter = incorrectCounter + 1;
+                incorrectCount.innerHTML = incorrectCounter;
+                output.innerHTML = incorrect[Math.floor(Math.random()*4)];
+            }
+        });
+   </script>
 </body>
 </html>

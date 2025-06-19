@@ -1,32 +1,93 @@
-<!-- 5.14 (Transformation with :hover) Create a transformation program that includes four images.
-When the user hovers over an image, the size of the image should increase by 20%.-->
+<!-- 9.24 More sophisticated computer-assisted instruction systems monitor the student’s perfor-
+mance over a period of time. The decision to begin a new topic is often based on the student’s suc-
+cess with previous topics. Modify the program in Exercise 9.23 to count the number of correct and
+incorrect responses typed by the student. After the student answers 10 questions, your program
+should calculate the percentage of correct responses. If the percentage is lower than 75 percent, dis-
+play Please ask your instructor for extra help, and reset the quiz so another student can try it. -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HW2 Q10</title>
-    <style>
-        .flex {
-            width: 150px;
-            display: flexbox;
-            flex-direction: column;
-        }
-        img {
-            padding: 20px;
-        }
-        img:hover{
-            transform:scale(1.20);
-        }
-    </style>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>HW3_Q10</title>
 </head>
 <body>
-    <div class="flex">
-        <img src="../ch05/fig05_16/EPT.png" width="100px" alt="Bug">
-        <img src="../ch05/fig05_16/EPT.png" width="100px" alt="Bug">
-        <img src="../ch05/fig05_16/EPT.png" width="100px" alt="Bug">
-        <img src="../ch05/fig05_16/EPT.png" width="100px" alt="Bug">
-    </div>
+   <div>
+      <h1>Multiplication practice!</h1>
+      <span>Questions Correct:</span>
+      <span id="counter">0</span><br>
+      <span>Incorrect Answers:</span>
+      <span id="inCoCounter">0</span>
+      <p>Question:</p>
+      <p id="question">3 x 3</p>
+   </div>
+   <div>
+      <textarea id="answerInput"></textarea>
+      <br>
+      <button>Submit</button>
+      <br>
+      <p id="output"></p>
+   </div>
+   <script>
+        const incorrect = [
+        "No. Please try again.",
+        "Wrong. Try once more.",
+        "Don't give up!",
+        "No. Keep trying."
+        ]
+        const correct = [
+        "Very good!",
+        "Excellent!",
+        "Nice work!",
+        "Keep up the good work!"
+        ]
+        const question = document.querySelector("#question");
+        let num1 = 0;
+        let num2 = 0;
+        let counter = 0;
+        let incorrectCounter = 0;
+        let questionsComplete = 0;
+
+        function generateQuestion(){
+            num1 = Math.floor(Math.random()*9)+1;
+            num2 = Math.floor(Math.random()*9)+1;
+            question.innerHTML = `${num1} x ${num2} = ?`;
+        }
+        generateQuestion();
+
+        const count = document.querySelector("#counter");
+        const subButton = document.querySelector("button");
+        const output = document.querySelector("#output");
+        const input = document.querySelector("#answerInput");
+        const incorrectCount = document.querySelector("#inCoCounter");
+        subButton.addEventListener("click", function checkAnswer(){
+            if(num1 * num2 == input.value) {
+                output.innerHTML = correct[Math.floor(Math.random()*4)];
+                generateQuestion();
+                counter = counter+1;
+                count.innerHTML = counter;
+                questionsComplete = questionsComplete + 1;
+                if(questionsComplete == 10){
+                    questionsComplete = 0;
+                    let percent = (counter/(counter+incorrectCounter)).toFixed(2);
+                    if(percent < 0.75){
+                        window.alert("Percentage: " + percent + "\nPlease ask your instructor for extra help.");
+                        counter = 0;
+                        incorrectCounter = 0;
+                        questionsComplete = 0;
+                        count.innerHTML = counter;
+                        incorrectCount.innerHTML = incorrectCounter;
+                    }
+                    else{window.alert("Percentage: " + percent + "\nWell done.");}
+                }
+            }
+            else {
+            incorrectCounter = incorrectCounter + 1;
+            incorrectCount.innerHTML = incorrectCounter;
+            output.innerHTML = incorrect[Math.floor(Math.random()*4)];
+            }
+        });
+   </script>
 </body>
 </html>
