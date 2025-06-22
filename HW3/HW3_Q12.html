@@ -1,38 +1,41 @@
-<!-- 6.22 Write a script that reads in two integers and determines and outputs HTML5 text that dis-
-plays whether the first is a multiple of the second. [Hint: Use the remainder operator.]-->
+<!-- 10.14 Write a script to simulate the rolling of two dice. 
+- The script should use Math.random to roll the first die and again to roll the second die. 
+- The sum of the two values should then be calculated.
+[Note: Since each die can show an integer value from 1 to 6, the sum of the values will vary from 2
+to 12, with 7 being the most frequent sum, and 2 and 12 the least frequent sums. Figure 10.22
+shows the 36 possible combinations of the two dice. Your program should roll the dice 36,000
+times. Use a one-dimensional array to tally the number of times each possible sum appears. Display
+the results in an HTML5 table. Also determine whether the totals are reasonable (e.g., there are six
+ways to roll a 7, so approximately 1/6 of all the rolls should be 7).] -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HW2 Q12</title>
+    <title>HW3_Q12</title>
 </head>
 <body>
-    <label for="integer1">Input integer one:</label>
-    <input type="number" id="integer1">
-    <br><br>
-    <label for="integer2">Input integer one:</label>
-    <input type="number" id="integer2">
-    <br><br>
-    <button>Is Multiple?</button>
-    <p id="output"></p>
-
-
     <script>
-        const body = document.querySelector("body");
-        const textP = document.querySelector("#output");
-        const button = document.querySelector("button");
-        const input1 = document.querySelector("#integer1");
-        const input2 = document.querySelector("#integer2");
+        let roll1 = 0;
+        let roll2 = 0;
 
-        button.addEventListener("click", isMultiple);
-        function isMultiple(){
-            let val1 = input1.value;
-            let val2 = input2.value;
-            if(val1%val2 == 0 || val2%val1 == 0) {textP.innerHTML = "YES!";}
-            else {textP.innerHTML = "NO!";}
+        function rollDice(){
+            roll1 = Math.floor(Math.random()*6) + 1;
+            roll2 = Math.floor(Math.random()*6) + 1;
         }
+
+        let rolls = [0,0,0,0,0,0,0,0,0,0,0]
+        for(let i = 0; i < 36000; i++){
+            rollDice();
+            let sum = roll1 + roll2;
+            rolls[sum-2] = rolls[sum-2] + 1;
+        }
+
+        for(let i = 2; i <= 12; i++){
+            console.log("Sum of " + i + " appeared " + rolls[i-2] + " times.");
+        }
+        console.log(rolls);
     </script>
 </body>
 </html>

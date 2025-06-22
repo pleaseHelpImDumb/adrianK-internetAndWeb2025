@@ -1,55 +1,178 @@
-<!-- 6.24 Write a script that calculates the squares and cubes of the numbers from 0 to 5 and outputs
-HTML5 text that displays the resulting values in an HTML5 table format, as show below. [Note:
-This script does not require any input from the user.]-->
+<!-- 10.17 ((Simulation: The Tortoise and the Hare) In this problem, you’ll re-create one of the truly
+great moments in history, namely the classic race of the tortoise and the hare. You’ll use random
+number generation to develop a simulation of this memorable event.
+
+Our contenders begin the race at square 1 of 70 squares. Each square represents a possible
+position along the race course. The finish line is at square 70. The first contender to reach or pass
+square 70 is rewarded with a pail of fresh carrots and lettuce. 
+
+The course weaves its way up the side of a slippery mountain, so occasionally the contenders lose ground.
+There’s a clock that ticks once per second. With each tick of the clock, your script should
+adjust the position of the animals according to the rules in Fig. 10.24.
+Animal Move type Percentage of the time Actual move
+Tortoise Fast plod 50% 3 squares to the right
+Slip 20% 6 squares to the left
+Slow plod 30% 1 square to the right
+Fig. 10.24 | Rules for adjusting the position of the tortoise and the hare. (Part 1 of 2.)
+Exercises 359
+Use variables to keep track of the positions of the animals (i.e., position numbers are 1–70).
+Start each animal at position 1 (i.e., the “starting gate”). If an animal slips left before square 1,
+move the animal back to square 1.
+Generate the percentages in Fig. 10.24 by producing a random integer i in the range
+1 ≤i ≤10. For the tortoise, perform a “fast plod” when 1 ≤i ≤5, a “slip” when 6 ≤i ≤7 and a “slow
+plod” when 8 ≤i ≤10. Use a similar technique to move the hare.
+
+Begin the race by printing
+BANG !!!!!
+AND THEY'RE OFF !!!!!
+Then, for each tick of the clock (i.e., each repetition of a loop), print a 70-position line show-
+ing the letter T in the position of the tortoise and the letter H in the position of the hare. Occa-
+sionally, the contenders will land on the same square. In this case, the tortoise bites the hare, and
+your script should print OUCH!!! beginning at that position. All print positions other than the T,
+the H or the OUCH!!! (in case of a tie) should be blank.
+
+After each line is printed, test whether either animal has reached or passed square 70. If so,
+print the winner, and terminate the simulation. If the tortoise wins, print TORTOISE WINS!!! YAY!!!
+If the hare wins, print Hare wins. Yuck! If both animals win on the same tick of the clock, you may
+want to favor the turtle (the “underdog”), or you may want to print It's a tie. If neither animal
+wins, perform the loop again to simulate the next tick of the clock. When you’re ready to run your
+script, assemble a group of fans to watch the race. You’ll be amazed at how involved your audience
+gets!
+Later in the book, we introduce a number of Dynamic HTML capabilities, such as graphics,
+images, animation and sound. As you study those features, you might enjoy enhancing your tor-
+toise-and-hare contest simulation -->
+
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HW2 Q13</title>
-    <style>
-        td, th {
-            text-align: center;
-            padding: 20px;
-        }
-    </style>
+    <title>HW3 Q13</title>
 </head>
 <body>
-    <script>
-        const body = document.querySelector("body");
-        const table = document.createElement("div");
-        
-        const starterNums = [0, 1, 2, 3, 4, 5];
+    <span>Clock:</span>
+    <span id="clock">0</span><br>
+    <p>Track:</p>
+    <p id="track">[_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _]</p>
+    <p id="comment"></p>
 
-        let tableHTML = `
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>Number</th>
-                        <th>Square</th>
-                        <th>Cube</th>
-                    </tr>
-                </thead>
-                <tbody>
-        `;
-        starterNums.forEach(num => {
-            const square = num * num;
-            const cube = num * num * num;
-            tableHTML += `
-                <tr>
-                    <td>${num}</td>
-                    <td>${square}</td>
-                    <td>${cube}</td>
-                </tr>
-            `;
-        });
-        tableHTML += `
-                </tbody>
-            </table>
-        `;
-        table.innerHTML = tableHTML;
-        body.appendChild(table);
+    <script>
+        const stopwatch = document.querySelector("#clock");
+        const track = document.querySelector("#track");
+        const comment = document.querySelector("#comment");
+        window.confirm("Start race?");
+
+        let time = 0;
+        let tPos = 1;
+        let hPos = 1;
+        comment.innerHTML = "BANG !!!!!<br>AND THEY'RE OFF !!!!!"
+        let intervalId;
+
+        function timeTick(){
+
+            if(time == 5) {comment.innerHTML = "";}
+
+            //Move time
+            time++;
+            stopwatch.innerHTML = time;
+
+            //Hare moves
+            let hMove = Math.floor(Math.random() * 10) + 1;
+            if(hMove == 1 || hMove == 2){
+                console.log("hMove: sleep, no move");
+            }
+            else if(hMove == 3 || hMove == 4){
+                console.log("hMove: big hop, 9 right");
+                hPos += 9;
+            }
+            else if(hMove == 5){
+                console.log("hMove: big slip, 12 left");
+                if(hPos <= 13) {
+                    hPos = 1
+                }
+                else{
+                    hPos -= 12;
+                }
+            }
+            else if(hMove >= 6 && hMove <= 8){
+                console.log("hMove: small hop, 1 right");
+                hPos++;
+            }
+            else{
+                console.log("hMove: small slip, 2 left");
+                if(hPos <= 3) {
+                    hPos = 1
+                }
+                else{
+                    hPos -= 2;
+                }
+            }
+
+            //Tortoise moves
+            let tMove = Math.floor(Math.random() * 10) + 1;
+            if(tMove >= 1 && tMove <= 5){
+                console.log("tMove: fast plod, 3 right");
+                tPos += 3;
+            }
+            else if(tMove == 6 || tMove == 7){
+                console.log("tMove: slip, 6 left");
+                if(tPos <= 7) {
+                    tPos = 1
+                }
+                else{
+                    tPos -= 6;
+                }
+            }
+            else{
+                console.log("tMove: slow plod, 1 right");
+                tPos++;
+            }
+
+            if(hPos >= 70 || tPos >= 70){
+                clearInterval(intervalId);
+                if(hPos >= 70){
+                    comment.innerHTML = "Hare wins. Yuck!";
+                }
+                else if (tPos >= 70){
+                    comment.innerHTML = "TORTOISE WINS!!! YAY!!!";
+                }
+                else{
+                    comment.innerHTML = "It's a tie!";
+                }
+            }
+
+            //Update the track
+            updateTrack(tPos, hPos);
+        }
+        intervalId = setInterval(timeTick, 1000);
+
+        function updateTrack(newTPos, newHPos){
+            let newTrack = "[";
+            if(newHPos >= 70){
+                newHPos = 70;
+            }
+            if(newTPos >= 70){
+                newTPos = 70;
+            }
+            for(let i = 1; i <= 70; i++){
+                if(i == newTPos && i == newHPos){
+                    newTrack += "OUCH!!!"
+                }
+                else if(i == newTPos && i != newHPos){
+                    newTrack += "T";
+                }
+                else if(i == newHPos && i != newTPos){
+                    newTrack += "H";
+                }
+                else{
+                    if(i==70){newTrack += "_";}
+                    else{newTrack += "_ ";}
+                }
+            }
+            newTrack+="]";
+            track.innerHTML = newTrack;
+        }
     </script>
 </body>
 </html>
