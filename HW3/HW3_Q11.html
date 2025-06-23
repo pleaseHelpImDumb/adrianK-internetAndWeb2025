@@ -71,6 +71,10 @@ and 5 means to intermix randomly problems of all these types. -->
         const selectGrade = document.querySelector("#gradeSelect");
         const selectType = document.querySelector("#probSelect");
         let probType = "";
+
+        selectGrade.addEventListener("change",generateQuestion);
+        selectType.addEventListener("change",generateQuestion);
+
         function generateQuestion(){
 
             switch(selectGrade.value){
