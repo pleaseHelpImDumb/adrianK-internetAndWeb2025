@@ -1,0 +1,98 @@
+<!-- 11.8 (Limericks) A limerick is a humorous five-line verse in which the first and second lines
+rhyme with the fifth, and the third line rhymes with the fourth. Using techniques similar to those
+developed in Exercise 11.7, write a script that produces random limericks. Polishing this program
+to produce good limericks is a challenging problem, but the result will be worth the effort! 
+
+11.7 Use four arrays of
+strings called article, noun, verb and preposition. Create a sentence by selecting a word at random
+from each array in the following order: article, noun, verb, preposition, article and noun. As each
+word is picked, concatenate it to the previous words in the sentence. The words should be separated
+by spaces. When the final sentence is output, it should start with a capital letter and end with a period.
+The arrays should be filled as follows: 
+the article array should contain the articles "the", "a", "one", "some" and "any"; 
+the noun array should contain the nouns "boy", "girl", "dog", "town" and "car"; 
+the verb array should contain the verbs "drove", "jumped", "ran", "walked" and "skipped";
+the preposition array should contain the prepositions "to", "from", "over", "under" and "on" -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW4_Q1</title>
+</head>
+<body>
+    <button>Generate Limerick</button>
+    <ul></ul>
+    <script>
+        const list = document.querySelector("ul")
+        const button = document.querySelector("button");
+        button.addEventListener("click", function addLimerick(){
+            const item = document.createElement("li");
+
+            item.innerHTML = generateLimerick();
+
+            list.prepend(item);
+        });
+
+        function generateLimerick(){
+            const article = ["the", "a", "one", "some", "any"];
+            const noun = ["boy", "girl", "dog", "town", "car"];
+            const endNounOneTwoFive = ["cat","hat","bat","mat","sat","pat","rat","splat","chat","flat"]; //must rhyme!
+            const endNounThreeFour = ["bear","hair","chair","pear","stare","dare","rare","fair","care","share"]; //must rhyme!
+            const verb = ["drove", "jumped", "ran", "walked", "skipped"];
+            const preposition = ["to", "from", "over", "under", "on"];
+
+            let limerick = "";
+            for(let i = 0; i < 5; i++){
+                //Pattern: article, noun, verb, preposition, article and noun
+                let line = "";
+                for(let j = 0; j < 6; j++){
+                    let chooser;
+                    switch(j){
+                        case 0: //choose article
+                            chooser = Math.floor(Math.random()*article.length);
+                            line += article[chooser];
+                            line += " ";
+                            break;
+                        case 1: //choose first noun
+                            chooser = Math.floor(Math.random()*noun.length);
+                            line += noun[chooser];
+                            line += " ";
+                            break;
+                        case 2: //choose verb
+                            chooser = Math.floor(Math.random()*verb.length);
+                            line += verb[chooser];
+                            line += " ";
+                            break;
+                        case 3: //choose preposition
+                            chooser = Math.floor(Math.random()*preposition.length);
+                            line += preposition[chooser];
+                            line += " ";
+                            break;
+                        case 4: //choose article
+                            chooser = Math.floor(Math.random()*article.length);
+                            line += article[chooser];
+                            line += " ";
+                            break;
+                        case 5: //choose end noun
+                            if(i == 2 || i == 3){
+                                chooser = Math.floor(Math.random()*endNounThreeFour.length);
+                                line += endNounThreeFour[chooser];
+                            }
+                            else{
+                                chooser = Math.floor(Math.random()*endNounOneTwoFive.length);
+                                line += endNounOneTwoFive[chooser];
+                            }
+                            line += ".<br>";
+                            break;
+                    }
+                }
+                line = line.charAt(0).toUpperCase() + line.slice(1);
+                limerick += line;
+            }
+            return limerick;
+        }
+    </script>
+</body>
+</html>

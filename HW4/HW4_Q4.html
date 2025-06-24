@@ -1,0 +1,55 @@
+<!-- 11.14 Write a script based on the program in Exercise 11.13 that inputs several lines of text and
+uses String method indexOf to determine the total number of occurrences of each letter of the
+alphabet in the text. Uppercase and lowercase letters should be counted together. Store the totals for
+each letter in an array, and print the values in tabular format in an HTML5 textarea after the totals
+have been determined. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW4_Q4</title>
+</head>
+<body>
+    <h1>Input:</h1>
+    <textarea name="" id="input" placeholder="Input text here!" rows="10" cols="50"></textarea>
+    <br>
+    <button>Submit</button>
+    
+    <h1>Alphabet count:</h1>
+    <textarea name="" id="output" rows="30"></textarea>
+
+    <script>
+        const button = document.querySelector("button");
+        const input = document.querySelector("#input");
+        const output = document.querySelector("#output");
+        
+        button.addEventListener("click", function calcAlph(){
+            let text = input.value;
+            let alphaCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+            const alphabet = "abcdefghijklmnopqrstuvwxyz";
+            text = text.toLowerCase();
+
+            let outputString = "";
+
+            for (let i = 0; i < alphabet.length; i++) {
+                const cLetter = alphabet[i];
+                outputString += `${alphabet[i]}: `;
+                let pos = 0;
+                while (pos < text.length) {
+                    const foundIndex = text.indexOf(cLetter, pos);
+                    if (foundIndex === -1) {
+                        break;
+                    }
+                    alphaCount[i]++;
+                    pos = foundIndex + 1;
+                }
+                outputString += `${alphaCount[i]}\n`;
+            }
+
+            output.value = outputString;
+        });
+    </script>
+</body>
+</html>

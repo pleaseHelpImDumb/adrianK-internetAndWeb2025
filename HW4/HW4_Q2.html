@@ -1,0 +1,73 @@
+<!-- 11.9 (Pig Latin) Write a script that encodes English-language phrases in pig Latin. Pig Latin is
+a form of coded language often used for amusement. Many variations exist in the methods used to
+form pig Latin phrases. For simplicity, use the following algorithm:
+To form a pig Latin phrase from an English-language phrase, tokenize the phrase into an array
+of words using String method split. To translate each English word into a pig Latin word, place
+the first letter of the English word at the end of the word and add the letters “ay.” Thus the word
+“jump” becomes “umpjay,” the word “the” becomes “hetay” and the word “computer” becomes
+“omputercay.” Blanks between words remain as blanks. Assume the following: The English phrase
+consists of words separated by blanks, there are no punctuation marks and all words have two or
+more letters. Function printLatinWord should display each word. Each token (i.e., word in the
+sentence) is passed to method printLatinWord to print the pig Latin word. Enable the user to
+input the sentence through an HTML5 form. Keep a running display of all the converted sen-
+tences in an HTML5 textarea.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW4_Q2</title>
+    <style>
+        li {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pig Latin</h1>
+    <h2>Input</h2>
+    <textarea name="" id="" placeholder="Input sentence here"></textarea>
+    <br>
+    <button>Translate</button>
+    <div id="translated">
+        <h2>Translations</h2>
+        <ul id="translations">
+
+        </ul>
+    </div>
+    <script>
+        const translations = document.querySelector("#translations");
+        const subButton = document.querySelector("button");
+        const inputText = document.querySelector("textarea");
+        
+        function printLatinWord(word){
+            word = word.toLowerCase();
+            let newWord = word.slice(1);
+            newWord += word.at(0);
+            newWord += "ay";
+            console.log(newWord);
+            return newWord;
+        }
+
+        function translateSentence(sent){
+            const words = sent.split(" ");
+            let newSentence = "";
+            words.forEach(e => {
+                newSentence += printLatinWord(e);
+                newSentence += " ";
+            });
+            return newSentence;
+        }
+
+        subButton.addEventListener("click", function translate(){
+            let userInput = inputText.value;
+            inputText.value = "";
+            const newLi = document.createElement("li");
+            newLi.innerHTML = translateSentence(userInput);
+            translations.appendChild(newLi);
+        });
+
+    </script>
+</body>
+</html>

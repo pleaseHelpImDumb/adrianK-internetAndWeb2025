@@ -1,0 +1,40 @@
+<!-- 11.11 Write a script that inputs a line of text, tokenizes it with String method split and outputs
+the tokens in reverse order.-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW4_Q3</title>
+</head>
+<body>
+    <h1>Input:</h1>
+    <textarea name="" id="" placeholder="Input line of text here!"></textarea>
+    <br>
+    <button>Submit</button>
+    
+    <h1>Reverse order:</h1>
+    <p></p>
+
+    <script>
+        const button = document.querySelector("button");
+        const input = document.querySelector("textarea");
+        const output = document.querySelector("p");
+        
+        button.addEventListener("click", function tokenize(){
+            let iText = input.value;
+            let tokenArray = iText.split(" ");
+
+            let reversedText = "";
+            tokenArray.reverse().forEach(e => {
+                reversedText += e.toLowerCase();
+                reversedText += " ";
+            });
+
+            reversedText = reversedText.at(0).toUpperCase() + reversedText.slice(1);
+            output.innerHTML = reversedText;
+        });
+    </script>
+</body>
+</html>
