@@ -1,0 +1,85 @@
+<!-- 11.22 (Printing Dates in Various Formats) Dates are printed in several common formats. Write
+a script that reads a date from an HTML5 form and creates a Date object in which to store it. Then
+use the various methods of the Date object that convert Dates into strings to display the date in sev-
+eral formats.-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW4_Q5</title>
+    <style>
+        ul {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>Date input:</h2>
+    <textarea name="" cols="50" placeholder="1/1/2025" id=""></textarea>
+    <br><button>Submit</button>
+    <h2>Date formats:</h2>
+    <ul>
+
+    </ul>
+    <script>
+        const input = document.querySelector("textarea");
+        const output = document.querySelector("ul");
+        const button = document.querySelector("button");
+        
+        button.addEventListener("click", function printDate(){
+            const inputDate = new Date(input.value);
+        
+            let newDate = document.createElement("li");
+            newDate.innerHTML = "<strong>--- " + input.value + " formats ---</strong>";
+            output.appendChild(newDate);
+
+            //toDateString
+            newDate = document.createElement("li");
+            newDate.innerHTML = "toDateString(): " + inputDate.toDateString();
+            output.appendChild(newDate);
+
+            //toISOString
+            newDate = document.createElement("li");
+            newDate.innerHTML = "toISOString(): " + inputDate.toISOString();
+            output.appendChild(newDate);
+
+            //toJSON
+            newDate = document.createElement("li");
+            newDate.innerHTML = "toJSON(): " + inputDate.toJSON();
+            output.appendChild(newDate);
+
+            //toLocaleDateString
+            newDate = document.createElement("li");
+            newDate.innerHTML = "toLocaleDateString(): " + inputDate.toLocaleDateString();
+            output.appendChild(newDate);
+
+            //toLocaleTimeString
+            newDate = document.createElement("li");
+            newDate.innerHTML = "toLocaleTimeString(): " + inputDate.toLocaleTimeString();
+            output.appendChild(newDate);
+
+            //toString
+            newDate = document.createElement("li");
+            newDate.innerHTML = "toString(): " + inputDate.toString();
+            output.appendChild(newDate);
+
+            //toTimeString
+            newDate = document.createElement("li");
+            newDate.innerHTML = "toTimeString(): " + inputDate.toTimeString();
+            output.appendChild(newDate);
+
+            //toUTCString
+            newDate = document.createElement("li");
+            newDate.innerHTML = "toUTCString(): " + inputDate.toUTCString();
+            output.appendChild(newDate);
+
+            //lineBreak
+            newDate.innerHTML = "<br>"
+            output.appendChild(newDate);
+        });
+    </script>
+</body>
+</html>
